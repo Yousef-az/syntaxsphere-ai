@@ -5,7 +5,8 @@
 
 <div class="app-container">
     <Sidebar />
-    <main>
+
+    <main class="main-content">
         <slot />
     </main>
 </div>
@@ -18,9 +19,16 @@
         color: white;
     }
 
-    main {
+    .main-content {
         flex: 1;
         padding: 2rem;
         overflow-y: auto;
+        height: 100vh;
+    }
+
+    @media (max-width: 768px) {
+        .main-content {
+            padding: 1rem;
+        }
     }
 </style>

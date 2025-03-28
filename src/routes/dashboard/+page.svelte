@@ -57,7 +57,7 @@
         </div>
     </header>
 
-    <div class="metrics-grid">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {#each cardData as card}
             <DashboardCard
                     title={card.title}
@@ -67,18 +67,22 @@
         {/each}
     </div>
 
-    <div class="charts-section">
-        <div class="chart-card sales-chart">
-            <h3 class="chart-title">Sales details</h3>
-            <LineChart data={lineData} title="Sales" color="#8CD7DB" />
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+        <div class="lg:col-span-2">
+            <div class="glossy-card p-6">
+                <h3 class="chart-title">Sales details</h3>
+                <LineChart data={lineData} title="Sales" color="#8CD7DB" />
+            </div>
         </div>
 
-        <div class="chart-card traffic-chart">
-            <DonutChart data={donutData} title="Traffic by location" />
+        <div class="lg:col-span-1">
+            <div class="glossy-card p-6">
+                <DonutChart data={donutData} title="Traffic by location" />
+            </div>
         </div>
     </div>
 
-    <div class="sales-section">
+    <div class="mt-6">
         <h3 class="section-title">Recent Sales</h3>
         <SalesTable data={salesData} />
     </div>
@@ -131,37 +135,6 @@
         color: #8CD7DB;
     }
 
-    .metrics-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .charts-section {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .chart-card {
-        background: rgba(20, 24, 33, 0.7);
-        border: 1px solid rgba(132, 215, 219, 0.1);
-        border-radius: 12px;
-        padding: 1.5rem;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(10px);
-        height: 400px;
-        transition: all 0.3s ease;
-    }
-
-    .chart-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
-        border-color: rgba(132, 215, 219, 0.3);
-    }
-
     .chart-title, .section-title {
         color: rgba(255, 255, 255, 0.7);
         font-size: 0.9rem;
@@ -169,25 +142,7 @@
         margin-bottom: 1rem;
     }
 
-    .sales-section {
-        margin-top: 2rem;
-    }
-
-    @media (max-width: 1200px) {
-        .metrics-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .charts-section {
-            grid-template-columns: 1fr;
-        }
-    }
-
     @media (max-width: 768px) {
-        .metrics-grid {
-            grid-template-columns: 1fr;
-        }
-
         .dashboard-header {
             flex-direction: column;
             align-items: flex-start;
