@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import Chart from 'chart.js/auto';
 
-    export let data: {x: string, y: number}[];
+    export let data: {channel: string, value: number}[];
     export let title: string;
     export let color: string = '#2DD4BF';
 
@@ -14,21 +14,17 @@
 
         if (ctx) {
             chart = new Chart(ctx, {
-                type: 'line',
+                type: 'bar',
                 data: {
-                    labels: data.map(d => d.x),
+                    labels: data.map(d => d.channel),
                     datasets: [{
                         label: title,
-                        data: data.map(d => d.y),
+                        data: data.map(d => d.value),
+                        backgroundColor: color + '80', // adding alpha
                         borderColor: color,
-                        backgroundColor: createGradient(ctx, color),
-                        borderWidth: 2,
-                        pointRadius: 0,
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: color,
-                        pointHoverBorderColor: '#fff',
-                        tension: 0.4,
-                        fill: true
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        maxBarThickness: 40
                     }]
                 },
                 options: {
@@ -74,7 +70,8 @@
                                 font: {
                                     size: 10
                                 }
-                            }
+                            },
+                            beginAtZero: true
                         }
                     }
                 }
@@ -87,23 +84,6 @@
             }
         };
     });
-
-    function createGradient(ctx: CanvasRenderingContext2D, color: string) {
-        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-        const rgbColor = hexToRgb(color);
-        gradient.addColorStop(0, `rgba(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}, 0.4)`);
-        gradient.addColorStop(1, `rgba(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}, 0)`);
-        return gradient;
-    }
-
-    function hexToRgb(hex: string) {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16)
-        } : { r: 0, g: 0, b: 0 };
-    }
 </script>
 
 <div class="chart-container">

@@ -5,20 +5,13 @@
 @tailwind utilities;
 
 :root {
-    --bg-primary: #0f1424;
-    --bg-secondary: #1a1f36;
-    --accent: #8CD7DB;
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #111111;
+    --accent: #2DD4BF;
+    --accent-light: #5EEAD4;
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.7);
-    --text-tertiary: rgba(255, 255, 255, 0.4);
-    --border-color: rgba(140, 215, 219, 0.1);
-    --success: #4ade80;
-    --error: #f87171;
-    --warning: #FFB36D;
-    --info: #9C8EED;
-    --card-bg: rgba(20, 24, 33, 0.7);
-    --card-radius: 12px;
-    --transition-speed: 0.3s;
+    --border-color: rgba(255, 255, 255, 0.08);
 }
 
 * {
@@ -29,7 +22,7 @@
 
 html, body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    background: var(--bg-primary);
     color: var(--text-primary);
     height: 100%;
     overflow: hidden;
@@ -37,137 +30,80 @@ html, body {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(140, 215, 219, 0.2);
+    background: rgba(45, 212, 191, 0.3);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(140, 215, 219, 0.3);
+    background: rgba(45, 212, 191, 0.5);
 }
 
-/* Glass morphism components */
-.glass-card {
-    background-color: var(--card-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border-color);
-    border-radius: var(--card-radius);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    transition: all var(--transition-speed) ease;
+/* Transparent card component */
+.transparent-card {
+    @apply bg-black bg-opacity-30 backdrop-blur-xl border border-white/5 rounded-xl shadow-xl transition-all duration-300;
 }
 
-.glass-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
-    border-color: rgba(140, 215, 219, 0.3);
+.transparent-card:hover {
+    @apply border-white/10 shadow-2xl transform -translate-y-1;
 }
 
 /* Button styles */
 .btn {
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all var(--transition-speed) ease;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+    @apply px-4 py-2 rounded-xl font-medium transition-all duration-200;
 }
 
 .btn-primary {
-    background: var(--accent);
-    color: var(--bg-primary);
-}
-
-.btn-primary:hover {
-    background: #a3e3e8;
-    transform: translateY(-2px);
+    @apply bg-teal-400 bg-opacity-80 text-black hover:bg-teal-300;
 }
 
 .btn-outline {
-    background: transparent;
-    border: 1px solid rgba(140, 215, 219, 0.3);
-    color: var(--accent);
+    @apply border border-white/10 text-white hover:bg-white/5;
 }
 
-.btn-outline:hover {
-    background: rgba(140, 215, 219, 0.1);
-    transform: translateY(-2px);
-}
-
-.btn-ghost {
-    background: transparent;
-    color: var(--text-secondary);
-    border: none;
-}
-
-.btn-ghost:hover {
-    color: var(--text-primary);
-    transform: translateY(-2px);
-}
-
-/* Text styles */
-.h1 {
-    font-size: 1.8rem;
-    font-weight: 600;
-}
-
-.h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-.text-secondary {
-    color: var(--text-secondary);
-}
-
-.text-tertiary {
-    color: var(--text-tertiary);
-}
-
-/* Status colors */
-.status-success {
-    color: var(--success);
-    background: rgba(74, 222, 128, 0.1);
-}
-
-.status-error {
-    color: var(--error);
-    background: rgba(248, 113, 113, 0.1);
-}
-
-.status-warning {
-    color: var(--warning);
-    background: rgba(255, 179, 109, 0.1);
-}
-
-.status-info {
-    color: var(--info);
-    background: rgba(156, 142, 237, 0.1);
+/* Chart container */
+.chart-container {
+    @apply transparent-card p-6 h-full;
 }
 
 /* Animated glow effects */
 .glow-text {
-    color: var(--accent);
-    text-shadow: 0 0 10px rgba(140, 215, 219, 0.5);
+    @apply text-teal-400;
+    text-shadow: 0 0 10px rgba(45, 212, 191, 0.5);
 }
 
 .animate-pulse-slow {
     animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Animation for page transitions */
+.page-transition-enter {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+    opacity: 1;
+}
+
+.page-transition-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
 }
 
 @keyframes pulse {
@@ -179,27 +115,83 @@ html, body {
     }
 }
 
-/* Responsive grid */
-.responsive-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-}
-
-@media (max-width: 1400px) {
-    .responsive-grid {
-        grid-template-columns: repeat(3, 1fr);
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 
-@media (max-width: 1024px) {
-    .responsive-grid {
-        grid-template-columns: repeat(2, 1fr);
+.fade-in {
+    animation: fadeIn 0.5s ease-in forwards;
+}
+
+/* Slide-up animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-@media (max-width: 768px) {
-    .responsive-grid {
-        grid-template-columns: 1fr;
-    }
+.slide-up {
+    animation: slideUp 0.5s ease-out forwards;
 }
+
+/* Custom Scrollbar - Enhanced version */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin: 4px 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(45, 212, 191, 0.3);
+    border-radius: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(45, 212, 191, 0.5);
+}
+
+/* Firefox scrollbar support */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(45, 212, 191, 0.3) rgba(0, 0, 0, 0.2);
+}
+
+/* Add a subtle glow effect to scrollbar when scrolling */
+.scrolling ::-webkit-scrollbar-thumb {
+    background: rgba(45, 212, 191, 0.5);
+    box-shadow: 0 0 8px rgba(45, 212, 191, 0.3);
+}
+
+/* Apply scrollbar styles to specific containers as well */
+.main-content, .sidebar-nav, .insights-list, .platform-activity {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(45, 212, 191, 0.3) rgba(0, 0, 0, 0.2);
+}
+
+/* Staggered animations */
+.stagger-item {
+    opacity: 0;
+}
+
+.stagger-item:nth-child(1) { animation: slideUp 0.3s ease-out 0.1s forwards; }
+.stagger-item:nth-child(2) { animation: slideUp 0.3s ease-out 0.2s forwards; }
+.stagger-item:nth-child(3) { animation: slideUp 0.3s ease-out 0.3s forwards; }
+.stagger-item:nth-child(4) { animation: slideUp 0.3s ease-out 0.4s forwards; }

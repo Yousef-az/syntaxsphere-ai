@@ -19,7 +19,7 @@
                     datasets: [{
                         data: data.map(d => d.value),
                         backgroundColor: data.map(d => d.color),
-                        borderColor: 'rgba(20, 24, 33, 0.7)',
+                        borderColor: 'rgba(0, 0, 0, 0.1)',
                         borderWidth: 2,
                         borderRadius: 4,
                         hoverOffset: 6
@@ -29,6 +29,12 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     cutout: '75%',
+                    animation: {
+                        animateRotate: true,
+                        animateScale: true,
+                        duration: 1500,
+                        easing: 'easeOutQuart'
+                    },
                     plugins: {
                         legend: {
                             position: 'right',
@@ -51,10 +57,10 @@
                             }
                         },
                         tooltip: {
-                            backgroundColor: 'rgba(20, 24, 33, 0.9)',
-                            titleColor: 'rgba(255, 255, 255, 0.7)',
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: 'rgba(255, 255, 255, 0.9)',
                             bodyColor: '#fff',
-                            borderColor: 'rgba(132, 215, 219, 0.3)',
+                            borderColor: 'rgba(255, 255, 255, 0.1)',
                             borderWidth: 1,
                             cornerRadius: 8,
                             displayColors: false,
@@ -90,11 +96,17 @@
         height: 100%;
         display: flex;
         flex-direction: column;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(20px);
     }
 
     .chart-title {
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1rem;
         font-weight: 500;
         margin-bottom: 1rem;
     }
